@@ -4,9 +4,9 @@
 }
 
 :root {
-	--cor1: #78a;
-	--cor2: #457;
-	--cor3: #023;
+	--cor1: #87a;
+	--cor2: #547;
+	--cor3: #203;
 	--cor4: #001;
 	--bg: linear-gradient(135deg, var(--cor1), var(--cor2));
 }
