@@ -1,36 +1,36 @@
 //Obrigado Senhor por me dá inteligência
 //Obrigado Virgem Maria, por ser uma mãe tão boa para mim
-const displayMain = document.querySelector('.display > #d-main');
+const displayMain = document.querySelector('#display > #d-main');
 const buttonStart = document.querySelector('.controls > #start');
-const buttonStop = document.querySelector('.controls > #stop');
+const buttonPause = document.querySelector('.controls > #pause');
 const buttonReset = document.querySelector('.controls > #reset');
 
 buttonStart.onclick = start;
-buttonStop.onclick = stop;
+buttonPause.onclick = pause;
 buttonReset.onclick = reset;
 
 let reqAniFra; //armazena o requestAnimationFrame para ser cancelado mais tarde
+let run = false;
 let init = 0;
 let ms = 0;
-let run = false;
-let pause = 0;
+let pauseMs = 0;
 
 //funções do cronômetro
 function start() {
 	if(!run) {
 		init = Date.now();
-		pause = ms;
+		pauseMs = ms;
 		run = true;
 	}
 	else {
-		ms = Date.now() - init + pause;
+		ms = Date.now() - init + pauseMs;
 	}
 	update();
 	cancelAnimationFrame(reqAniFra);
 	reqAniFra = requestAnimationFrame(start);
 }
 
-function stop() {
+function pause() {
 	cancelAnimationFrame(reqAniFra);
 	run = false;
 }
@@ -44,6 +44,7 @@ function reset() {
 //atualizações da tela
 function update() {
 	displayMain.innerText = textDisplay(ms);
+	resizeFontSize();
 }
 
 //converter ms para um texto no formato
@@ -80,5 +81,24 @@ function textDisplay(ms) {
 	}
 }
 
+function resizeFontSize() {
+    const boxWidth = document.querySelector("#display").clientWidth;
+    const length = displayMain.innerText.length;
+    const fontSize =  `${boxWidth / length * 1.6}px`;
+    displayMain.style.setProperty("--font-size", fontSize);
+}
+
 //iniciar cronometro com o visor
 update();
+
+//Alterna os botões de start e pause
+//e habilitar ou desabilitar
+function toggleBtnsObserver() {
+    buttonStart.classList.toggle("hide", run)
+    buttonPause.classList.toggle("hide", !run);
+    
+    if(run || ms == 0) buttonReset.setAttribute("disabled", "");
+    else buttonReset.removeAttribute("disabled");
+    requestAnimationFrame(toggleBtnsObserver);
+}
+toggleBtnsObserver();
