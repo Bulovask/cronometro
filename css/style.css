@@ -4,9 +4,9 @@
 }
 
 :root {
-    --color-primary: #abc;
-    --color-secondary: #cde;
-    --color-terciary: #678;
+    --color-primary: #aa0;
+    --color-secondary: #884;
+    --color-terciary: #040;
 }
 
 main {
@@ -51,6 +51,14 @@ main {
     text-shadow: 1px 1px 0 black, -1px -1px 0 white;
 }
 
+#d-main small {
+    font-size: 0.33em;
+    display: flex;
+    align-items: end;
+    padding: 0;
+    margin: 0;
+}
+
 .controls {
     display: flex;
     justify-content: center;
@@ -78,4 +86,16 @@ main {
 
 .hide {
     display: none;
+}
+
+.popup {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    font-size: 5px;
+    width: 70vw;
+    background-color: #ff7;
+    padding: 10px;
+    border: 1px solid #cc7;
+    border-radius: 5px;
 }

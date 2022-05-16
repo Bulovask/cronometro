@@ -17,5 +17,23 @@
 				<input id='reset' class="btn" type='button' value='RESETAR'/>
 			</section>
 		</main>
+		<div class="popup">
+		    <b>Atenção:</b>
+		    <p>O estado do cronômetro é salvo no LocalStorage, se você limpar o armazenamento da web perderá o estado atual</p>
+		</div>
+		<script>
+		    (function() {
+		        const popups = document.querySelectorAll(".popup");
+		        popups.forEach(p => {
+		            const deletePopup = () => {
+		                const parent = p.parentNode;
+		                p.style = "transform: translate(100%); opacity: 0;transition: transform 1s, opacity 1s";
+		                setTimeout(() => {parent.removeChild(p)}, 1000)
+		            }
+		            p.onclick = deletePopup;
+		            setTimeout(deletePopup, 15000);
+		        });
+		    })();
+		</script>
 	</body>
 </html>
